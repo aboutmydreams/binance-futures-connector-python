@@ -26,20 +26,20 @@ class BinanceSocketManager(threading.Thread):
             return False
 
         if is_combined:
-            factory_url = self.stream_url + "/stream"
+            factory_url = f"{self.stream_url}/stream"
         else:
-            factory_url = self.stream_url + "/ws"
+            factory_url = f"{self.stream_url}/ws"
 
         if not is_live:
             payload_obj = json.loads(payload.decode("utf8"))
 
             if is_combined:
-                factory_url = factory_url + "?streams=" + payload_obj["params"]
+                factory_url = f"{factory_url}?streams=" + payload_obj["params"]
             else:
-                factory_url = factory_url + "/" + payload_obj["params"]
+                factory_url = f"{factory_url}/" + payload_obj["params"]
             payload = None
 
-        logging.info("Connection with URL: {}".format(factory_url))
+        logging.info(f"Connection with URL: {factory_url}")
 
         factory = BinanceClientFactory(factory_url, payload=payload)
         factory.base_client = self

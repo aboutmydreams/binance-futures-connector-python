@@ -35,7 +35,7 @@ setup(
     AUTHOR=AUTHOR,
     url=URL,
     keywords=["Binance futures", "Public API"],
-    install_requires=[req for req in requirements],
+    install_requires=list(requirements),
     packages=find_packages(exclude=("tests",)),
     classifiers=[
         "Intended Audience :: Developers",

@@ -17,7 +17,7 @@ api_key = ""
 client = UMFutures(api_key)
 response = client.new_listen_key()
 
-logging.info("Listen key : {}".format(response["listenKey"]))
+logging.info(f'Listen key : {response["listenKey"]}')
 
 ws_client = UMFuturesWebsocketClient()
 ws_client.start()

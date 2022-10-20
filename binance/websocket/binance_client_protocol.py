@@ -15,7 +15,7 @@ class BinanceClientProtocol(WebSocketClientProtocol):
     def onConnect(self, response):
         logging.info("Server connected")
         if self.payload:
-            logging.info("Sending message to Server: {}".format(self.payload))
+            logging.info(f"Sending message to Server: {self.payload}")
             self.sendMessage(self.payload, isBinary=False)
         # reset the delay after reconnecting
         self.factory.resetDelay()

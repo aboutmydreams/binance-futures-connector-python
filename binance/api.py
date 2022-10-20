@@ -44,10 +44,11 @@ class API(object):
         self.session.headers.update(
             {
                 "Content-Type": "application/json;charset=utf-8",
-                "User-Agent": "binance-connector/" + __version__,
+                "User-Agent": f"binance-connector/{__version__}",
                 "X-MBX-APIKEY": key,
             }
         )
+
 
         if base_url:
             self.base_url = base_url
@@ -95,14 +96,14 @@ class API(object):
         payload["timestamp"] = get_timestamp()
         query_string = self._prepare_params(payload)
         signature = self._get_sign(query_string)
-        url_path = url_path + "?" + query_string + "&signature=" + signature
+        url_path = f"{url_path}?{query_string}&signature={signature}"
         return self.send_request(http_method, url_path)
 
     def send_request(self, http_method, url_path, payload=None, special=False):
         if payload is None:
             payload = {}
         url = self.base_url + url_path
-        logging.debug("url: " + url)
+        logging.debug(f"url: {url}")
         params = cleanNoneValue(
             {
                 "url": url,
@@ -112,7 +113,7 @@ class API(object):
             }
         )
         response = self._dispatch_request(http_method)(**params)
-        logging.debug("raw response from server:" + response.text)
+        logging.debug(f"raw response from server:{response.text}")
         self._handle_exception(response)
 
         try:
@@ -136,7 +137,7 @@ class API(object):
         if self.show_header:
             result["header"] = response.headers
 
-        if len(result) != 0:
+        if result:
             result["data"] = data
             return result
 
