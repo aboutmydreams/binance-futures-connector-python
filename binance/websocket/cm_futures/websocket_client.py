@@ -17,9 +17,7 @@ class CMFuturesWebsocketClient(BinanceWebsocketClient):
 
         Update Speed: 100ms
         """
-        self.live_subscribe(
-            "{}@aggTrade".format(symbol.lower()), id, callback, **kwargs
-        )
+        self.live_subscribe(f"{symbol.lower()}@aggTrade", id, callback, **kwargs)
 
     def index_price(self, pair: str, id: int, speed: int, callback, **kwargs):
         """Index Price Streams
@@ -31,7 +29,7 @@ class CMFuturesWebsocketClient(BinanceWebsocketClient):
         Update Speed: 3000ms OR 1000ms
         """
         self.live_subscribe(
-            "{}@indexPrice@{}s".format(pair.lower(), speed), id, callback, **kwargs
+            f"{pair.lower()}@indexPrice@{speed}s", id, callback, **kwargs
         )
 
     def mark_price(self, symbol: str, id: int, speed: int, callback, **kwargs):
@@ -44,7 +42,7 @@ class CMFuturesWebsocketClient(BinanceWebsocketClient):
         Update Speed: 3000ms OR 1000ms
         """
         self.live_subscribe(
-            "{}@markPrice@{}s".format(symbol.lower(), speed), id, callback, **kwargs
+            f"{symbol.lower()}@markPrice@{speed}s", id, callback, **kwargs
         )
 
     def pair_mark_price(self, pair: str, id: int, speed: int, callback, **kwargs):
@@ -57,7 +55,7 @@ class CMFuturesWebsocketClient(BinanceWebsocketClient):
         Update Speed: 3000ms OR 1000ms
         """
         self.live_subscribe(
-            "{}@markPrice@{}s".format(pair.lower(), speed), id, callback, **kwargs
+            f"{pair.lower()}@markPrice@{speed}s", id, callback, **kwargs
         )
 
     def kline(self, symbol: str, id: int, interval: str, callback, **kwargs):
@@ -92,7 +90,7 @@ class CMFuturesWebsocketClient(BinanceWebsocketClient):
         """
 
         self.live_subscribe(
-            "{}@kline_{}".format(symbol.lower(), interval), id, callback, **kwargs
+            f"{symbol.lower()}@kline_{interval}", id, callback, **kwargs
         )
 
     def continuous_kline(
@@ -129,10 +127,10 @@ class CMFuturesWebsocketClient(BinanceWebsocketClient):
         """
 
         self.live_subscribe(
-            "{}_{}@continuousKline_{}".format(pair.lower(), contractType, interval),
+            f"{pair.lower()}_{contractType}@continuousKline_{interval}",
             id,
             callback,
-            **kwargs
+            **kwargs,
         )
 
     def index_kline(self, pair: str, id: int, interval: str, callback, **kwargs):
@@ -165,10 +163,7 @@ class CMFuturesWebsocketClient(BinanceWebsocketClient):
         """
 
         self.live_subscribe(
-            "{}@indexPriceKline_{}".format(pair.lower(), interval),
-            id,
-            callback,
-            **kwargs
+            f"{pair.lower()}@indexPriceKline_{interval}", id, callback, **kwargs
         )
 
     def mark_kline(self, symbol: str, id: int, interval: str, callback, **kwargs):
@@ -201,10 +196,7 @@ class CMFuturesWebsocketClient(BinanceWebsocketClient):
         """
 
         self.live_subscribe(
-            "{}@markPriceKline_{}".format(symbol.lower(), interval),
-            id,
-            callback,
-            **kwargs
+            f"{symbol.lower()}@markPriceKline_{interval}", id, callback, **kwargs
         )
 
     def mini_ticker(self, id: int, callback, symbol=None, **kwargs):
@@ -225,9 +217,7 @@ class CMFuturesWebsocketClient(BinanceWebsocketClient):
         if symbol is None:
             self.live_subscribe("!miniTicker@arr", id, callback, **kwargs)
         else:
-            self.live_subscribe(
-                "{}@miniTicker".format(symbol.lower()), id, callback, **kwargs
-            )
+            self.live_subscribe(f"{symbol.lower()}@miniTicker", id, callback, **kwargs)
 
     def ticker(self, id: int, callback, symbol=None, **kwargs):
         """Individual symbol or all symbols ticker
@@ -247,9 +237,7 @@ class CMFuturesWebsocketClient(BinanceWebsocketClient):
         if symbol is None:
             self.live_subscribe("!ticker@arr", id, callback, **kwargs)
         else:
-            self.live_subscribe(
-                "{}@ticker".format(symbol.lower()), id, callback, **kwargs
-            )
+            self.live_subscribe(f"{symbol.lower()}@ticker", id, callback, **kwargs)
 
     def book_ticker(self, id: int, callback, symbol=None, **kwargs):
         """Individual symbol or all book ticker
@@ -268,9 +256,7 @@ class CMFuturesWebsocketClient(BinanceWebsocketClient):
         if symbol is None:
             self.live_subscribe("!bookTicker", id, callback, **kwargs)
         else:
-            self.live_subscribe(
-                "{}@bookTicker".format(symbol.lower()), id, callback, **kwargs
-            )
+            self.live_subscribe(f"{symbol.lower()}@bookTicker", id, callback, **kwargs)
 
     def liquidation_order(self, id: int, callback, symbol=None, **kwargs):
         """The Liquidation Order Snapshot Streams push force liquidation order information for specific symbol.
@@ -288,9 +274,7 @@ class CMFuturesWebsocketClient(BinanceWebsocketClient):
         if symbol is None:
             self.live_subscribe("!forceOrder@arr", id, callback, **kwargs)
         else:
-            self.live_subscribe(
-                "{}@forceOrder".format(symbol.lower()), id, callback, **kwargs
-            )
+            self.live_subscribe(f"{symbol.lower()}@forceOrder", id, callback, **kwargs)
 
     def partial_book_depth(
         self, symbol: str, id: int, level, speed, callback, **kwargs
@@ -307,10 +291,7 @@ class CMFuturesWebsocketClient(BinanceWebsocketClient):
         """
 
         self.live_subscribe(
-            "{}@depth{}@{}ms".format(symbol.lower(), level, speed),
-            id,
-            callback,
-            **kwargs
+            f"{symbol.lower()}@depth{level}@{speed}ms", id, callback, **kwargs
         )
 
     def diff_book_depth(self, symbol: str, id: int, speed, callback, **kwargs):
@@ -325,7 +306,7 @@ class CMFuturesWebsocketClient(BinanceWebsocketClient):
         """
 
         self.live_subscribe(
-            "{}@depth@{}ms".format(symbol.lower(), speed), id, callback, **kwargs
+            f"{symbol.lower()}@depth@{speed}ms", id, callback, **kwargs
         )
 
     def user_data(self, listen_key: str, id: int, callback, **kwargs):

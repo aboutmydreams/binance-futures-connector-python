@@ -10,11 +10,7 @@ from binance.error import (
 
 
 def cleanNoneValue(d) -> dict:
-    out = {}
-    for k in d.keys():
-        if d[k] is not None:
-            out[k] = d[k]
-    return out
+    return {k: d[k] for k in d.keys() if d[k] is not None}
 
 
 def check_required_parameter(value, name):
@@ -35,7 +31,7 @@ def check_required_parameters(params):
 
 
 def check_enum_parameter(value, enum_class):
-    if value not in set(item.value for item in enum_class):
+    if value not in {item.value for item in enum_class}:
         raise ParameterValueError([value])
 
 

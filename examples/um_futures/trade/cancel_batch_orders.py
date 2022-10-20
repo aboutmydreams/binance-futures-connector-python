@@ -18,7 +18,5 @@ try:
     logging.info(response)
 except ClientError as error:
     logging.error(
-        "Found error. status: {}, error code: {}, error message: {}".format(
-            error.status_code, error.error_code, error.error_message
-        )
+        f"Found error. status: {error.status_code}, error code: {error.error_code}, error message: {error.error_message}"
     )
